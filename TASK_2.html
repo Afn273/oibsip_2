@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        * {
+            margin:0;
+            background-color: rgb(62, 59, 61);
+            padding:0;
+           
+        }
+
+        body {
+            align-items: center;
+            justify-content: center;
+            
+        }
+
+        .C1 {
+            position: relative;
+        }
+
+        
+        .s1 {
+            background-color: rgb(75, 133, 180);
+            height: 450px;
+            width : 600px;
+            margin : 75px 15px 15px 350px;
+            
+        }
+
+        .s2 {
+            border-radius:15px;
+            padding:10px;
+            background-color:aliceblue;
+            margin:10px;
+            top:25px;
+            left:500px;
+            position:absolute;
+            height:380px;
+            width:310px;
+           
+        }
+
+        .s3 {
+            background-color:  rgb(153, 190, 220);
+            position: relative;
+            margin-top: 15px;
+            height: 45px;
+            width : 270px;
+            margin-left: 10px;
+            padding: 10px;
+            border-radius: 15px;
+           
+          
+ 
+        }
+        .answer-display {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: white;
+            background-color:  rgb(153, 190, 220);
+        }
+
+       
+        input[type="text"] {
+            background-color:  rgb(153, 190, 220);
+            height:100%;
+            width : 100%;
+            padding: 0px;
+            border-radius: 15px;
+            border: 0;
+ 
+        }
+
+        .s4 {
+            background-color:aliceblue;
+            height:255px;
+            width:270px;
+            padding:10px;
+            margin-left:10px;
+            border-radius:15px;
+            margin-top:15px;
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:flex-start;
+            gap:10px;
+          
+        }
+
+        .C2 {
+            background-color:rgb(108, 162, 206);
+            height:40px;
+            width:46px;
+            border-radius:7px;
+            color:rgb(37, 113, 189);
+          
+           
+        }
+
+        .C3 { 
+            background-color: rgb(108, 162, 206);
+            height : 45px;
+            width : 46px;
+            border: none;
+            border-radius: 7px;
+            color: rgb(37, 113, 189);
+            flex-grow: 0;
+           
+        }
+
+        .C4 {
+            background-color:  rgb(153, 190, 220);
+            height : 45px;
+            width : 46px;
+            border: none;
+            border-radius: 7px;
+            color: rgb(6, 6, 6);
+            flex-grow: 0;
+           
+        }
+
+        .C5 {
+            background-color:  rgb(81, 132, 173);
+            height : 45px;
+            width : 102px;
+            border: none;
+            border-radius: 7px;
+            color: white;
+            flex-grow: 0;
+           
+        }
+
+    
+    </style>
+</head>
+
+<body>
+    <div class="C1">
+        <div class="s1">
+            <div class="s2">
+                <div class="s3">
+                   <input type="text" id="anss" readonly>
+                   <div id="answerDisplay" class="answer-display"></div>
+                </div>
+               
+
+                <div class="s4">
+                    <button class="C2" type="button" onclick="handleButtonClick('(')">(</button>
+                    <button class="C2" type="button" onclick="handleButtonClick(')')">)</button>
+                    <button class="C2" type="button" onclick="Answer()">ans</button>
+                    <button class="C2" type="button" onclick="Delete()">del</button>
+                    <button class="C2" type="button" onclick="Clear()">clear</button>
+
+                    <button class="C4" type="button" onclick="handleButtonClick('7')">7</button>
+                    <button class="C4" type="button" onclick="handleButtonClick('8')">8</button>
+                    <button class="C4" type="button" onclick="handleButtonClick('9')">9</button>
+                    <button class="C3" type="button" onclick="handleButtonClick('%')">%</button>
+                    <button class="C3" type="button" onclick="calSQRT('√')">√</button>
+
+                    <button class="C4" type="button" onclick="handleButtonClick('4')">4</button>
+                    <button class="C4" type="button" onclick="handleButtonClick('5')">5</button>
+                    <button class="C4" type="button" onclick="handleButtonClick('6')">6</button>
+                    <button class="C3" type="button" onclick="handleButtonClick('*')">×</button>
+                    <button class="C3" type="button" onclick="handleButtonClick('/')">÷</button>
+
+                    <button class="C4" type="button" onclick="handleButtonClick('1')">1</button>
+                    <button class="C4" type="button" onclick="handleButtonClick('2')">2</button>
+                    <button class="C4" type="button" onclick="handleButtonClick('3')">3</button>
+                    <button class="C3" type="button" onclick="handleButtonClick('+')">+</button>
+                    <button class="C3" type="button" onclick="handleButtonClick('-')">-</button>
+
+                    <button class="C3" type="button" onclick="handleButtonClick('.')">.</button>
+                    <button class="C4" type="button" onclick="handleButtonClick('0')">0</button>
+                    <button class="C3" type="button" onclick="PlusMinus()">±</button>
+                    <button class="C5" type="button" onclick="Equals()">ENTER</button>
+         
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var result = "";
+
+        function handleButtonClick(valuen) {
+            var display = document.getElementById('anss');
+            display.value+= valuen;
+        }
+
+        function calSQRT() {
+            let currentResult = document.getElementById("result").value;
+            let number = parseFloat(currentResult);
+            let sqrtValue = Math.sqrt(number);
+            document.getElementById("result").value = sqrtValue;
+        }
+
+        function PlusMinus() {
+            var display =  document.getElementById('anss');
+            var currentValue = parseFloat(display.value);
+            display.value = (-currentValue).toString();
+        }
+
+        function Delete() {
+            var display =  document.getElementById('anss');
+            display.value = display.value.slice(0, -1);
+        }
+
+        function Clear() {
+            var display =  document.getElementById('anss');
+            display.value = ""; 
+            document.getElementById("answerDisplay").innerText="";
+        }    
+
+        function Answer() {
+            var display =  document.getElementById('anss');
+            display.value += result;
+        }
+
+        function Equals() {
+            var display =  document.getElementById('anss');
+            var equation = display.value;
+            result = eval(equation);
+            display.value = equation;
+            document.getElementById("answerDisplay").innerText = result;
+        }
+    </script>
+</body>
+</html>
