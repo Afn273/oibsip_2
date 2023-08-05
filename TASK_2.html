@@ -161,6 +161,7 @@
                     <button class="C4" type="button" onclick="handleButtonClick('9')">9</button>
                     <button class="C3" type="button" onclick="handleButtonClick('%')">%</button>
                     <button class="C3" type="button" onclick="calSQRT('√')">√</button>
+                    
 
                     <button class="C4" type="button" onclick="handleButtonClick('4')">4</button>
                     <button class="C4" type="button" onclick="handleButtonClick('5')">5</button>
@@ -193,12 +194,15 @@
         }
 
         function calSQRT() {
-            let currentResult = document.getElementById("result").value;
-            let number = parseFloat(currentResult);
-            let sqrtValue = Math.sqrt(number);
-            document.getElementById("result").value = sqrtValue;
+        var display = document.getElementById('anss');
+        var currentValue = parseFloat(display.value);
+        if (currentValue >= 0) {
+            var sqrtValue = Math.sqrt(currentValue);
+            display.value = sqrtValue;
+        } else {
+            display.value = "Error";
         }
-
+      }
         function PlusMinus() {
             var display =  document.getElementById('anss');
             var currentValue = parseFloat(display.value);
@@ -222,12 +226,18 @@
         }
 
         function Equals() {
-            var display =  document.getElementById('anss');
-            var equation = display.value;
-            result = eval(equation);
-            display.value = equation;
-            document.getElementById("answerDisplay").innerText = result;
-        }
+    var display = document.getElementById('anss');
+    var equation = display.value;
+
+    try {
+        result = eval(equation);
+        document.getElementById("answerDisplay").innerText = result;
+    } catch (error) {
+        display.value = "Error";
+        document.getElementById("answerDisplay").innerText = "";
+    }
+}
+
     </script>
 </body>
 </html>
